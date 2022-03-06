@@ -14,15 +14,17 @@ public:
         if(head == NULL)
             return NULL;
         ListNode* curr = head;
-        ListNode* prev = NULL;
-        while(curr && curr->next)
+        ListNode* sentinel = new ListNode(INT_MIN);
+        ListNode* prev = sentinel;
+        sentinel->next = head;
+        while(curr)
         {
-            ListNode* succ = curr->next;
-            if(curr->val == succ->val)
-                curr->next = succ->next;
+            if(curr->val == prev->val)
+                prev->next = curr->next;
             else
-                curr = curr->next;
+                prev = curr;
+            curr = curr->next;
         }
-        return head;
+        return sentinel->next;
     }
 };
