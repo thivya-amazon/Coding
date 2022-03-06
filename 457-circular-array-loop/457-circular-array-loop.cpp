@@ -12,6 +12,8 @@ public:
     bool circularArrayLoop(vector<int>& nums) {
         for(int i = 0; i < nums.size(); i++)
         {
+            if(nums[i] == 0)
+                continue;
             int fast = i;
             int slow = i;
             while(true)
@@ -40,7 +42,14 @@ public:
                         return true;
                     else
                     {
-                       break;                        
+                       int newSlow = i;
+                        while(nums[newSlow] != 0)
+                        {
+                            int nxt = helper(newSlow, nums);
+                            nums[newSlow] = 0;
+                            newSlow = nxt;
+                        }
+                        break;
                     }
                 }
             }
