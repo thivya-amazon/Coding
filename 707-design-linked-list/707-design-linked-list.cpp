@@ -19,8 +19,7 @@ public:
     }
     
     int get(int index) {
-        cout << index <<"," <<size << endl;
-        if(index < 0 || index >= size || !head)
+        if(index < 0 || index >= size)
             return -1;
         Node* curr = head;
         for(int i = 0; i < index; i++)
@@ -66,7 +65,7 @@ public:
     }
     
     void deleteAtIndex(int index) {
-        if(index < 0 || index >= size || !head)
+        if(index < 0 || index >= size)
             return;
         size--;
         if(index == 0)
