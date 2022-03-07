@@ -1,11 +1,7 @@
 class Solution {
 public:
-    int reverse(int x) {
-        bool positive = true;
-        if(x < 0)
-           positive = false; 
+    int reverse(int x) { 
         int result = 0;
-      //  x = abs(x);
         while(x)
         {
             if(result > INT_MAX/10)
