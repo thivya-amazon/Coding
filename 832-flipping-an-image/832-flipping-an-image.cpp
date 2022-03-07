@@ -8,14 +8,14 @@ public:
         for(int i = 0; i < ROW; i++)
         {
             reverse(image[i].begin(), image[i].end());
-        }
-        
-        //Flip the bits
-        for(int i = 0; i < ROW; i++)
+            //Flip the bits
             for(int j = 0; j < COL; j++)
             {
                 image[i][j] = !image[i][j];
             }
+        }
+        
+
         return image;
     }
 };
