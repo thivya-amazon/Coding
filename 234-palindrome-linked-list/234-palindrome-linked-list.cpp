@@ -41,25 +41,34 @@ public:
         return prev;
     }
     bool isPalindrome(ListNode* head) {
+        bool result = true;
         if(head == NULL || head->next == NULL)
-            return true;
-        
-        ListNode* mid = findMiddle(head);
+            return result;
+        ListNode* temp1 = head;
+        ListNode* mid = findMiddle(temp1);
         ListNode* head2 = reverseList(mid);
         
         ListNode* temp = head2;
         while(temp != NULL)
         {
             if(head->val != temp->val)
-                return false;
+            {
+                result = false;
+                break;
+            }                
             head = head->next;
             temp = temp->next;
         }
         
-        // if(head != head2)
-        //     return false;
+        ListNode* curr = head;
+        while(curr)
+        {
+            cout << curr->val << "";
+            cout << endl;
+            curr = curr->next;
+        }
         
-        return true;
+        return result;
         
     }
 };
