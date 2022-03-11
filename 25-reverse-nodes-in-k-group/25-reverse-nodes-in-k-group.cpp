@@ -10,50 +10,62 @@
  */
 class Solution {
 public:
-   ListNode* reverseKNodes(ListNode* head, int k)
-   {
-       ListNode* prev = NULL;
-       ListNode* curr = head;
-       ListNode* next = NULL;
-       while(curr && k)
-       {
-           next = curr->next;
-           curr->next = prev;
-           prev = curr;
-           curr = next;
-           k--;
-       }
-       return prev;
-   }
-    ListNode* reverseKGroup(ListNode* head, int k) {
+    ListNode* reverseKNodes(ListNode* head, int k)
+    {
         if(head == NULL)
             return NULL;
-        ListNode* newHead = NULL;
+        ListNode* prev = NULL;
         ListNode* curr = head;
-        ListNode* tail = NULL;
-        while(curr)
+        ListNode* next = NULL;
+        while(curr && k > 0)
         {
-            int count = 0;
-            while(curr && count < k)
-            {
-                curr = curr->next;
-                count++;
-            }
-            
-            if(count == k)
-            {
-                ListNode* revHead = reverseKNodes(head, k);
-                if(!newHead)
-                    newHead = revHead;
-                if(tail != NULL)
-                    tail->next = revHead;
-                tail = head;
-                head = curr;
-            }
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+            k--;
         }
-        if(tail)
-            tail->next = head;
+        return prev;
+    }
+    ListNode* reverseKGroup(ListNode* head, int k) {
+    if(head == NULL)
+        return NULL;
         
-        return newHead ? newHead : head;
+    ListNode* curr = head;
+    ListNode* newHead = NULL;
+    ListNode* tail = NULL;
+    
+    while(curr)
+    {
+        int count = 0;
+        while(curr && count < k)
+        {
+            curr = curr->next;
+            count++;
+        }
+
+        if(count == k)
+        {
+            ListNode* revHead = reverseKNodes(head, k);
+
+            if(!newHead)
+            {
+                newHead = revHead;
+            }
+
+            if(tail)
+                tail->next = revHead;
+            tail = head;
+            head = curr;
+        }
+        else
+        {
+            if(tail)
+                tail->next = head;
+        }
+
+    }
+
+    return newHead ? newHead : head;
     }
 };
