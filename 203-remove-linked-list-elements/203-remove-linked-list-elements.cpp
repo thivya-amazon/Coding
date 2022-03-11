@@ -13,32 +13,21 @@ public:
     ListNode* removeElements(ListNode* head, int val) {
         if(head == NULL)
             return NULL;
-        ListNode* prev = NULL;
+        ListNode* sentinel = new ListNode(INT_MIN, head);
+        ListNode* pred = sentinel;
         ListNode* curr = head;
         while(curr)
         {
             if(curr->val == val)
             {
-                ListNode* temp = curr;
-                if(!prev)
-                {
-                    curr = curr->next;
-                    head = curr;
-                }
-                else
-                {
-                    prev->next = curr->next;
-                    curr = curr->next;
-                }
-                delete(temp);
+                pred->next = curr->next;
             }
             else
             {
-                prev = curr;
-                curr = curr->next;
+                pred = curr;
             }
-               
+            curr = curr->next;
         }
-        return head;
+        return sentinel->next;
     }
 };
