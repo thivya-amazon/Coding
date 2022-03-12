@@ -40,8 +40,7 @@ public:
             }
             curr = succ;
         }
-        if(tail)
-            tail->next = greaterHead;
+        tail->next = greaterHead;
         return sentinel->next;
         
     }
