@@ -12,7 +12,7 @@ public:
         int pos = 7;
         while(temp)
         {
-            value += (temp & 1) << pos;
+            value |= (temp & 1) << pos;
             temp = temp >> 1;
             pos--;
         }
