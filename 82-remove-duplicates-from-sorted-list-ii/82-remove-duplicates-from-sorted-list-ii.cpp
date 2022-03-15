@@ -21,14 +21,14 @@ public:
             {
                 while(succ && curr->val == succ->val)
                     succ = succ->next;
+                pred->next = succ;
+                curr = succ;
             }
             else
             {
                 pred = curr;
                 curr = curr->next;
             }
-            pred->next = succ;
-            curr = succ;
         }
         return sentinel->next;
     }
