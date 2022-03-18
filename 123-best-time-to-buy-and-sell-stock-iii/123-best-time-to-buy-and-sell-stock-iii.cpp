@@ -2,20 +2,20 @@ class Solution {
 public:
     int maxProfit(vector<int>& prices) {
         int n = prices.size();
-        int prevGlobal1 = 0;
-        int global2 = 0;
-        int local2 = 0;
-        int global1 = 0;
-        int local1 = 0;
-        
+        vector<int> global2(n, 0);
+        vector<int> local2(n, 0);
+        vector<int> global1(n, 0);
+        vector<int> local1(n, 0);
+    
+
         for(int i = 1; i < n; i++)
         {
-            local1 = prices[i] - prices[i-1] + max(0, local1);
-            prevGlobal1 = global1;
-            global1 = max(global1, local1);
-            local2 = prices[i] - prices[i-1] + max(prevGlobal1, local2);
-            global2 = max(global2, local2);
+            local1[i] = prices[i] - prices[i-1] + max(0, local1[i-1]);
+            global1[i] = max(global1[i-1], local1[i]);
+            
+            local2[i] = prices[i] - prices[i-1] + max(global1[i-1], local2[i-1]);
+            global2[i] = max(global2[i-1], local2[i]);
         }
-        return global2;
+        return global2[n-1];
     }
 };
