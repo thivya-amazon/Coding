@@ -7,7 +7,7 @@ public:
             while(nums[i] != i+1)
             {
                  int destIndex = nums[i] - 1;
-                if(destIndex < nums.size() && nums[i] != nums[destIndex])
+                if( nums[i] != nums[destIndex])
                 {                   
                     swap(nums[i], nums[destIndex]);
                 }
