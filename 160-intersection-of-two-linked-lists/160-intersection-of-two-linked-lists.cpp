@@ -18,6 +18,7 @@ public:
         
         int m = 0;
         int n = 0;
+        int diff = 0;
         
         while(curr1)
         {
@@ -35,66 +36,31 @@ public:
         curr2 = headB;
         if(m > n)
         {
-            while(curr1)
+           diff = m - n; 
+            while(diff)
             {
                 curr1 = curr1->next;
-                m--;
-                if(m == n)
-                {
-                    while(m > 0)
-                    {
-                        if(curr1 == curr2)
-                            return curr1;
-                        else
-                        {
-                            curr1 = curr1->next;
-                            curr2 = curr2->next;
-                            m--;
-                            n--;
-                        }
-                    }
-                }
-
-            }
-        }
-        else if(n > m)
-        {
-            while(curr2)
-            {
-                curr2 = curr2->next;
-                n--;
-                if(m == n)
-                {
-                    while(n > 0)
-                    {
-                        if(curr1 == curr2)
-                            return curr1;
-                        else
-                        {
-                            curr1 = curr1->next;
-                            curr2 = curr2->next;
-                            m--;
-                            n--;
-                        }
-                    }
-                }
-
-            }
-        }
+                diff--;
+            }                
+        }           
         else
         {
-            cout << m << "," << n << endl;
-            while(n > 0)
+            diff = n - m; 
+            while(diff)
             {
-                if(curr1 == curr2)
-                    return curr1;
-                else
-                {
-                    curr1 = curr1->next;
-                    curr2 = curr2->next;
-                    m--;
-                    n--;
-                }
+                curr2 = curr2->next;
+                diff--;
+            } 
+        }
+  
+        while(curr1 && curr2)
+        {
+            if(curr1 == curr2)
+                return curr1;
+            else
+            {
+                curr1 = curr1->next;
+                curr2 = curr2->next;
             }
         }
         
