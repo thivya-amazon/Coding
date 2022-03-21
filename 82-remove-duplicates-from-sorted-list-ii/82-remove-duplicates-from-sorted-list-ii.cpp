@@ -20,7 +20,12 @@ public:
             if(succ && curr->val == succ->val)
             {
                 while(succ && curr->val == succ->val)
+                {
+                    ListNode* temp = succ;
                     succ = succ->next;
+                    delete(temp);
+                }
+                    
                 pred->next = succ;
                 curr = succ;
             }
