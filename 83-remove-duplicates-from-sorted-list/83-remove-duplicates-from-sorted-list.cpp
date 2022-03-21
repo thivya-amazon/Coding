@@ -19,8 +19,19 @@ public:
         sentinel->next = head;
         while(curr)
         {
-            if(curr->val == prev->val)
-                prev->next = curr->next;
+            ListNode* succ = curr->next;
+            if(succ && curr->val == succ->val)
+            {
+                ListNode* temp = curr;
+                while(succ && curr->val == succ->val)
+                {
+                    ListNode* temp = succ;
+                    succ = succ->next; 
+                    delete(temp);
+                }
+                curr->next = succ;
+            }
+                
             else
                 prev = curr;
             curr = curr->next;
