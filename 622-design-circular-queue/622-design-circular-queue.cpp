@@ -19,14 +19,13 @@ public:
         if(isEmpty())
         {
             front = 0;
-            rear = 0;
-            queue[rear] = value;            
+            rear = 0;                      
         }
         else
         {
             rear = (rear + 1) % capacity;
-            queue[rear] = value;
         }
+        queue[rear] = value;  
         size++;
         return true;
     }
