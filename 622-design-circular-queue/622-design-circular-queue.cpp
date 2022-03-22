@@ -57,13 +57,13 @@ public:
     }
     
     bool isEmpty() {
-        if(front == -1 && rear == -1)
+        if(size == 0)
             return true;
         return false;
     }
     
     bool isFull() {
-        if(front == (rear+1) % capacity)
+        if(size == capacity)
             return true;
         return false;
     }
