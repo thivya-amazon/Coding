@@ -6,16 +6,14 @@ public:
         vector<int> result;
         for(int i = 0; i < heights.size(); i++)
         {
-            if(s.empty() || heights[i] < heights[s.top()])
-                s.push(i);
-            else if(heights[i] >= heights[s.top()])
+            if(!s.empty())
             {
-                while(!s.empty() && heights[i] >= heights[s.top()])
-                    s.pop();
-                s.push(i);
+                if(heights[i] >= heights[s.top()])
+                    while(!s.empty() && heights[i] >= heights[s.top()])
+                        s.pop();                
             }
-        }
-        
+            s.push(i);
+        }        
         while(!s.empty())
         {
             result.push_back(s.top());
