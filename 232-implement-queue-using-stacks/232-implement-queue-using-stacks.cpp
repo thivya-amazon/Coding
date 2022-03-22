@@ -8,17 +8,15 @@ public:
     
     //Push operation should ensure the first element is on the top of the stack
     void push(int x) {
-        while(!s1.empty())
+        if(s1.empty())
         {
-            s2.push(s1.top());
-            s1.pop();
+            s1.push(x);
+            return;
         }
-        s1.push(x);
-        while(!s2.empty())
-        {
-            s1.push(s2.top());
-            s2.pop();
-        }
+        int elem = s1.top();
+        s1.pop();
+        push(x);
+        s1.push(elem);
     }
     
     int pop() {
