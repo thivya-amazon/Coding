@@ -6,7 +6,7 @@ public:
         stack<int> mono;
         for(int i = temperatures.size()-1; i >= 0; i--)
         {
-            while(!mono.empty() && temperatures[i] >= temperatures[mono.top()])
+            while(!mono.empty() && temperatures[mono.top()] <= temperatures[i])
                 mono.pop();
             if(!mono.empty())
                 answer[i] = mono.top() - i;
