@@ -1,8 +1,7 @@
 class Solution {
 public:
     vector<int> nextGreaterElements(vector<int>& nums) {
-        //Find all the next greater elements for each elemet in nums2 and store it in a map
-        unordered_map<int, int> umap;
+        //Find all the next greater elements for each element
         stack<int> mono;
         vector<int> result(nums.size(), -1);
         for(int i = 2 * nums.size()-1; i >= 0; i--)
