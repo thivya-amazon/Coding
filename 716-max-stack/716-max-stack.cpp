@@ -63,7 +63,6 @@ public:
             if(!maxStack.empty())
             {
                 int currMax = peekMax();
-                elemToAdd = aux.top();
                 if( currMax >= elemToAdd)
                     maxStack.push({elemToAdd, currMax});
                 else
