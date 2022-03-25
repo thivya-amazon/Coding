@@ -59,19 +59,20 @@ public:
         //Push back values from aux stack to maxStack with an updated maxValue
         while(!aux.empty())
         {
-            int elemToAdd = aux.top();
-            if(!maxStack.empty())
-            {
-                int currMax = peekMax();
-                if( currMax >= elemToAdd)
-                    maxStack.push({elemToAdd, currMax});
-                else
-                    maxStack.push({elemToAdd, elemToAdd});
-            }
-            else
-            {
-                 maxStack.push({elemToAdd, elemToAdd});
-            }
+            push(aux.top());
+            // int elemToAdd = aux.top();
+            // if(!maxStack.empty())
+            // {
+            //     int currMax = peekMax();
+            //     if( currMax >= elemToAdd)
+            //         maxStack.push({elemToAdd, currMax});
+            //     else
+            //         maxStack.push({elemToAdd, elemToAdd});
+            // }
+            // else
+            // {
+            //      maxStack.push({elemToAdd, elemToAdd});
+            // }
             aux.pop();
         }
         return maxVal;
