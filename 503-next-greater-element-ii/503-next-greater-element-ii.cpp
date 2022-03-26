@@ -4,15 +4,21 @@ public:
         //Find all the next greater elements for each element
         stack<int> mono;
         vector<int> result(nums.size(), -1);
-        for(int i = 2 * nums.size()-1; i >= 0; i--)
+        //Initialize the stack
+        for(int i = nums.size()-1; i >= 0; i--)
         {
-            while(!mono.empty() && mono.top() <= nums[i % nums.size()])
+            while(!mono.empty() && mono.top() <= nums[i])
+                mono.pop();
+            mono.push(nums[i]);
+        }
+        for(int i = nums.size()-1; i >= 0; i--)
+        {
+            while(!mono.empty() && mono.top() <= nums[i])
                 mono.pop();
             if(!mono.empty())
-                result[i % nums.size()] = mono.top();
-            mono.push(nums[i % nums.size()]);
+                result[i] = mono.top();
+            mono.push(nums[i]);
         }
-
         return result;
     }
 };
