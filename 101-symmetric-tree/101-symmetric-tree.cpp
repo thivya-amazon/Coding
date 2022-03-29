@@ -13,11 +13,12 @@ class Solution {
 public:
     bool isMirror(vector<int>& input)
     {
-        int size = input.size();
-        for (int i = 0; i < size / 2; i++) {
-            if (input[i] != input[size - 1 - i]) {
+        int start = 0;
+        int end = input.size()-1;
+        while(start < end)
+        {
+            if(input[start++] != input[end--])
                 return false;
-            }
         }
         return true;
     }
