@@ -29,14 +29,11 @@ public:
                 q.pop();
                 if(levelNode->left == NULL && levelNode->right == NULL)
                     return level;
-                else
-                {
-                    if(levelNode->left)
-                        q.push(levelNode->left);
-                    if(levelNode->right)
-                        q.push(levelNode->right);
-                }
-                
+
+                if(levelNode->left)
+                    q.push(levelNode->left);
+                if(levelNode->right)
+                    q.push(levelNode->right);               
             }
         }
         return 0;
