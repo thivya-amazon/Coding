@@ -29,10 +29,13 @@ public:
                 q.pop();
                 if(levelNode->left == NULL && levelNode->right == NULL)
                     minDepth = min(minDepth, level);
-                if(levelNode->left)
-                    q.push(levelNode->left);
-                if(levelNode->right)
-                    q.push(levelNode->right);
+                else
+                {
+                    if(levelNode->left)
+                        q.push(levelNode->left);
+                    if(levelNode->right)
+                        q.push(levelNode->right);
+                }
                 
             }
         }
