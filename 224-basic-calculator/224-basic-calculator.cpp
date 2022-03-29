@@ -1,46 +1,66 @@
 class Solution {
 public:
     int calculate(string s) {
-        int len = s.size();
-        stack<pair<int, int>> stk;
-        int sum = 0;
-        int sign = 1;
+        int number = 0;
+        char operation = '+';
+        stack<int> stk;
         
         for(int i = 0; i < s.size(); i++)
         {
-            //Char is a digit
+            //Find the number to operate on
             if(isdigit(s[i]))
-            {
-                //Form the complete num
-                int num = 0;
-                while(isdigit(s[i]) && i < len)
-                {
-                    num = num * 10 + (s[i] - '0');
-                    i++;
-                }
-                //To get the index back to the last numeric digit
-                i--;
-                sum += (num * sign);
-                sign = 1;                   
-            }
-            else if(s[i] == '-')
-            {
-                sign = -1;
-            }
+                number = number * 10 + (s[i] - '0');
             else if(s[i] == '(')
             {
-                //Push the sum and sign upto this point into a stack and get ready to process the inner expression
-                stk.push({sum,sign});
-                sum = 0;
-                sign = 1;
+                int j = i+1;
+                int braces = 1;
+                while(braces > 0)
+                {
+                    if(s[j] == '(')
+                        braces++;
+                    else if(s[j] == ')')
+                        braces--;
+                    j++;
+                }
+                //length of the outermost expression within parantheses
+                int length = j-i-1;
+                number = calculate(s.substr(i+1, length));
+                //Reset i back to the last character
+                i = j-1;
             }
-            else if(s[i] == ')')
+            
+            //Find the operator and operate on the number
+            if(!isdigit(s[i]) && !iswspace(s[i]) || i == s.size()-1)
             {
-                //Pop the stack and populate sum and sign values since the inner expression is evaluated
-                sum = stk.top().first + (stk.top().second*sum);
-                stk.pop();
+                if(operation == '+')
+                    stk.push(number);
+                else if(operation == '-')
+                    stk.push(-number);
+                else if(operation == '*')
+                {
+                    int prevNum = stk.top();
+                    stk.pop();
+                    stk.push(prevNum * number);
+                }
+                else if(operation == '/')
+                {
+                    int prevNum = stk.top();
+                    stk.pop();
+                    stk.push(prevNum / number);
+                }
+                //Update the operation and reset the number to get the next number
+                operation = s[i];
+                number = 0;
             }
         }
-        return sum;
+        
+        //Stack has all the number with appropriate signs. Just adding all of them gives the result
+        int result = 0;
+        while(!stk.empty())
+        {
+            result += stk.top();
+            stk.pop();
+        }
+        return result;
     }
 };
