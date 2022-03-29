@@ -28,7 +28,7 @@ public:
                 TreeNode* levelNode = q.front();
                 q.pop();
                 if(levelNode->left == NULL && levelNode->right == NULL)
-                    minDepth = min(minDepth, level);
+                    return level;
                 else
                 {
                     if(levelNode->left)
@@ -39,6 +39,6 @@ public:
                 
             }
         }
-        return minDepth;
+        return 0;
     }
 };
