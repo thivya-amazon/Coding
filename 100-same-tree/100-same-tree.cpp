@@ -18,7 +18,33 @@ public:
             return false;
         if(p->val != q->val)
             return false;
-        return (isSameTree(p->left, q->left) && isSameTree(p->right, q->right));
+        queue<TreeNode*> q1;
+        queue<TreeNode*> q2;
+        q1.push(p);
+        q2.push(q);
+        while(!q1.empty() && !q2.empty())
+        {
+            TreeNode* pLevelNode = q1.front(); q1.pop();
+            TreeNode* qLevelNode = q2.front(); q2.pop();
+            if(pLevelNode->val != qLevelNode->val)
+                return false;
+            if((pLevelNode->left && !qLevelNode->left) || (!pLevelNode->left && qLevelNode->left))
+                return false;
+            if((pLevelNode->right && !qLevelNode->right) || (!pLevelNode->right && qLevelNode->right))
+                return false;
+            if(pLevelNode->left && qLevelNode->left)
+               {
+                   q1.push(pLevelNode->left);
+                   q2.push(qLevelNode->left);
+               }
+            if(pLevelNode->right && qLevelNode->right)
+               {
+                   q1.push(pLevelNode->right);
+                   q2.push(qLevelNode->right);
+               }
+            
+        }
+        return true;
         
     }
 };
