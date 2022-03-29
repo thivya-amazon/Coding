@@ -27,20 +27,14 @@ public:
             {
                 TreeNode* levelNode = q.front();
                 q.pop();
-                if(levelNode->left == NULL && levelNode->right == NULL)
-                {
-                    maxDepth = max(maxDepth, level);
-                }
-                else
-                {
-                    if(levelNode->left)
-                        q.push(levelNode->left);
-                    if(levelNode->right)
-                        q.push(levelNode->right);    
-                }
+
+                if(levelNode->left)
+                    q.push(levelNode->left);
+                if(levelNode->right)
+                    q.push(levelNode->right);    
             }
         }
-        return maxDepth;
+        return level;
         
     }
 };
