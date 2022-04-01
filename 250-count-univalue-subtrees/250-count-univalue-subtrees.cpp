@@ -16,11 +16,11 @@ public:
     {
          bool isUnival = true;
         //Leaf nodes
-        // if(root->left == NULL && root->right == NULL)
-        // {
-        //     count++;
-        //     return true;
-        // }
+        if(root->left == NULL && root->right == NULL)
+        {
+            count++;
+            return true;
+        }
         
         //Internal nodes
         if(root->left)
