@@ -21,21 +21,18 @@ public:
         while(!q.empty())
         {
             count = q.size();
-            vector<int> slate;
+            double sum = 0;
             for(int i = 0; i < count; i++)
             {
                 TreeNode* levelNode = q.front();
                 q.pop();
-                slate.push_back(levelNode->val);
+                sum += levelNode->val;
                 if(levelNode->left)
                     q.push(levelNode->left);
                 if(levelNode->right)
                     q.push(levelNode->right);
             }
-            double sum = 0;
-            for(int i = 0; i < slate.size(); i++)
-                 sum += slate[i];
-            result.push_back((double)sum/slate.size());
+            result.push_back(sum/count);
         }
         return result;
     }
