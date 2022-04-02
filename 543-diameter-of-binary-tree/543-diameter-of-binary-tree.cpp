@@ -22,15 +22,13 @@ public:
         if(root -> left)
         {
             lh = getDiameter(root->left) + 1;
-            height =  max(height, lh);
         }
             
         if(root -> right)
         {
             rh = getDiameter(root->right) + 1;
-            height = max(height, rh);
         }
-            
+        height =  max(rh, lh);   
         diameter = max(diameter, lh+rh);
         return height;
         
