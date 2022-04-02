@@ -29,7 +29,7 @@ public:
             rightArrows = right+1;
        maxPathLen = max(maxPathLen, leftArrows+rightArrows); 
         
-        return(max(leftArrows, rightArrows));
+        return(max(rightArrows, leftArrows));
             
     }
     int longestUnivaluePath(TreeNode* root) {
