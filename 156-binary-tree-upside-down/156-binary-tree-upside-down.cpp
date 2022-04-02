@@ -12,28 +12,25 @@
 class Solution {
 public:
     TreeNode* newRoot = NULL;
-    TreeNode* dfs(TreeNode* root)
+    void dfs(TreeNode* root, TreeNode* parent, TreeNode* rightSibling)
     {
         if(root == NULL)
-            return NULL;
+            return;
         if(root->left == NULL && root->right == NULL)
-        {
-            if(!newRoot)
-                newRoot = root;
-            return root;
-        }
-        TreeNode* newParent = dfs(root->left);
-        newParent->right = root;
-        newParent->left = root->right;
-        root->left = NULL;
-        root->right = NULL;
+            newRoot = root;
         
-        return root;
+        TreeNode* oldLeft = root->left;
+        TreeNode* oldRight = root->right;
+        root->left = rightSibling;
+        root->right = parent;
+        
+        dfs(oldLeft, root, oldRight);
+        
     }
     TreeNode* upsideDownBinaryTree(TreeNode* root) {
-        if(root == NULL)
-            return root;
-        dfs(root);
+      if(root == NULL)
+          return NULL;
+        dfs(root, NULL, NULL);
         return newRoot;
     }
 };
