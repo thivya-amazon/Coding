@@ -16,10 +16,8 @@ public:
     {
         if(root == NULL)
             return 0;
-        int left = 0;
-        int right = 0;
-        left = dfs(root->left);
-        right = dfs(root->right);
+        int left = dfs(root->left);
+        int right = dfs(root->right);
         
         int leftArrows = 0;
         int rightArrows = 0;
