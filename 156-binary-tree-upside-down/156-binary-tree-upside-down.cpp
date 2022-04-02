@@ -18,7 +18,8 @@ public:
             return NULL;
         if(root->left == NULL && root->right == NULL)
         {
-            newRoot = root;
+            if(!newRoot)
+                newRoot = root;
             return root;
         }
         TreeNode* newParent = dfs(root->left);
