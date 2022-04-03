@@ -14,6 +14,8 @@ public:
     int globalTilt = 0;
     int dfs(TreeNode* node)
     {
+        if(node->left == NULL && node->right == NULL)
+            return node->val;
         int myTilt = 0;
         int leftSubVal = 0;
         int rightSubVal = 0;
