@@ -26,10 +26,10 @@ public:
         {
             rightSubVal = dfs(node->right);
         }
-           
+        sum = node->val + leftSubVal + rightSubVal;
         myTilt = abs(leftSubVal - rightSubVal);
         globalTilt += myTilt;
-        return node->val + leftSubVal + rightSubVal;
+        return sum;
             
     }
     int findTilt(TreeNode* root) {
