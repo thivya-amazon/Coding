@@ -32,14 +32,6 @@ class Solution {
 public:
     Node* dfs(Node* node, Node* pred)
     {
-        if(node->left == NULL && node->right == NULL)
-        {
-            //For leaf nodes, predecessor is obtained from the parent.
-            pred->right = node;
-            node->left = pred;
-            pred = node;
-            return pred;
-        }
         //Internal nodes - pred can be from either direction
         if(node->left)
             pred = dfs(node->left, pred);
