@@ -11,36 +11,41 @@
  */
 class Solution {
 public:
+    enum Zones{
+        ARRIVAL = 0,
+        INTERIM,
+        DEPARTURE            
+    };
     vector<int> preorderTraversal(TreeNode* root) {
         vector<int> result;
         if(root == NULL)
             return result;
-        stack<pair<TreeNode*,string>> s;
-        s.push({root, "arrival"});
+        stack<pair<TreeNode*,Zones>> s;
+        s.push({root, ARRIVAL});
         while(!s.empty())
         {
             TreeNode* node = s.top().first;
-            string zone = s.top().second;
-            if(zone == "arrival")
+            Zones zone = s.top().second;
+            if(zone == ARRIVAL)
             {
                 //Update the zone
-                zone = "interim";
+                zone = INTERIM;
                 s.pop();
                 s.push({node, zone});
                 //Visit the node
                 result.push_back(node->val);
                 if(node->left)
-                    s.push({node->left, "arrival"});
+                    s.push({node->left, ARRIVAL});
             }
-            else if(zone == "interim")
+            else if(zone == INTERIM)
             {
-                zone = "departure";
+                zone = DEPARTURE;
                 s.pop();
                 s.push({node, zone});
                 if(node->right)
-                    s.push({node->right, "arrival"});
+                    s.push({node->right, ARRIVAL});
             }
-            else if(zone == "departure")
+            else if(zone == DEPARTURE)
             {
                 s.pop();
             }
