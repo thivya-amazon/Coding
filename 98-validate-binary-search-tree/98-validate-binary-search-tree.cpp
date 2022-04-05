@@ -11,23 +11,51 @@
  */
 class Solution {
 public:
-    bool valid = true;
-    bool dfs(TreeNode* root, long maxVal, long minVal)
-    {
-        if(root == NULL)
-            return true;
-        bool isBst = false;
-        if(root->val < maxVal && root->val > minVal)
-        {
-            isBst = dfs(root->left, root->val, minVal) && dfs(root->right, maxVal, root->val);
+    bool validBST = false;
+    class BST{
+        public:
+        int largest;
+        int smallest;
+        bool isBST;
+        BST(){
+            
         }
-        valid = isBst;
-        return isBst;
+        BST(int l, int s, bool b)
+        {
+            largest = l;
+            smallest = s;
+            isBST = b;
+        }
+    };
+    BST dfs(TreeNode* node)
+    {
+        BST myValue(node->val, node->val, true);
+        BST leftValue;
+        BST rightValue;
+        
+        if(node->left)
+        {
+            leftValue = dfs(node->left);
+            myValue.largest = max(myValue.largest, leftValue.largest);
+            myValue.smallest = min(myValue.smallest, leftValue.smallest);
+            if(!leftValue.isBST || node->val <= leftValue.largest)
+                myValue.isBST = false;
+        }
+        if(node->right)
+        {
+            rightValue = dfs(node->right);
+            myValue.largest = max(myValue.largest, rightValue.largest);
+            myValue.smallest = min(myValue.smallest, rightValue.smallest);
+            if(!rightValue.isBST || node->val >= rightValue.smallest)
+                myValue.isBST = false;
+        }
+        validBST = myValue.isBST;
+        return myValue;
     }
     bool isValidBST(TreeNode* root) {
-       if(root == NULL)
-           return valid;
-        dfs(root, LONG_MAX, LONG_MIN);
-        return valid;
+        if(root == NULL)
+            return true;
+        dfs(root);
+        return validBST;
     }
 };
