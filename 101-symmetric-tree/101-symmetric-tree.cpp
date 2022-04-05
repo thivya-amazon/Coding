@@ -11,54 +11,25 @@
  */
 class Solution {
 public:
-    bool isMirror(vector<int>& input)
+    bool dfs(TreeNode* tree1, TreeNode* tree2)
     {
-        int start = 0;
-        int end = input.size()-1;
-        while(start < end)
+        if(tree1 == NULL && tree2 == NULL)
+            return true;
+        if(tree1 == NULL || tree2 == NULL)
+            return false;
+        bool left = false;
+        bool right = false;
+        if(tree1->val == tree2->val)
         {
-            if(input[start++] != input[end--])
-                return false;
+            left = dfs(tree1->left, tree2->right);
+            right = dfs(tree1->right, tree2->left);
         }
-        return true;
+        
+        return (left && right);
     }
     bool isSymmetric(TreeNode* root) {
         if(root == NULL)
             return true;
-        queue<TreeNode*> q;
-        q.push(root);
-        int count = 0;
-       
-        while(!q.empty())
-        {
-            count = q.size();
-            vector<int> slate;
-            for(int i = 0; i < count; i++)
-            {
-                TreeNode* levelNode = q.front();
-                q.pop();
-
-                if(levelNode->left)
-                {
-                    slate.push_back(levelNode->left->val);
-                    q.push(levelNode->left);
-                }                    
-                else
-                    slate.push_back(INT_MIN);
-
-                if(levelNode->right)
-                {
-                    slate.push_back(levelNode->right->val);
-                    q.push(levelNode->right);
-                }                    
-                else
-                    slate.push_back(INT_MIN);
-
-            }
-            if(!isMirror(slate))
-                return false;
-        }
-        return true;
-        
+        return dfs(root, root);
     }
 };
