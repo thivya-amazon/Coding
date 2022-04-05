@@ -22,7 +22,7 @@ public:
         if(node->left)
         {
             leftSum = dfs(node->left);
-            myMaxPathSum = max(myMaxPathSum, myMaxPathSum + leftSum);
+            myMaxPathSum = max(myMaxPathSum, node->val + leftSum);
             myMaxVPathSum = myMaxPathSum;
         }
         if(node->right)
