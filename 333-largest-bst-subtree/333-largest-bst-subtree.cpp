@@ -32,19 +32,19 @@ public:
     };
     BST dfs(TreeNode* node)
     {
-        BST myValue;
+        BST myValue(node->val, node->val, 1, true);
         BST leftValue;
         BST rightValue;
 
         if(node->left == NULL && node->right == NULL)
         {
-            //return BST(INT_MAX, INT_MIN, 0, true);
+            
         }
            
-        myValue.largest = node->val;
-        myValue.smallest = node->val;
-        myValue.count = 1;
-        myValue.isBST = true;       
+        // myValue.largest = node->val;
+        // myValue.smallest = node->val;
+        // myValue.count = 1;
+        // myValue.isBST = true;       
         
         if(node->left)
         {
