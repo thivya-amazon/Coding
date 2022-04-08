@@ -12,8 +12,8 @@
 class Solution {
 public:
     TreeNode* closestNode = NULL;
-    int minDiff = INT_MAX;
-    void dfs(TreeNode* root, int target)
+    double minDiff = INT_MAX;
+    void dfs(TreeNode* root, double target)
     {
         if(root == NULL)
             return;
@@ -36,11 +36,11 @@ public:
         if(root == NULL)
             return NULL;
         //Round up the target value for comaparison
-        int targetR = ceil(target);
-        if(targetR - target < 0.5)
-            target = targetR;
-        else
-            target = floor(target);
+        // int targetR = ceil(target);
+        // if(targetR - target < 0.5)
+        //     target = targetR;
+        // else
+        //     target = floor(target);
         dfs(root, target);
         return closestNode->val;
     }
