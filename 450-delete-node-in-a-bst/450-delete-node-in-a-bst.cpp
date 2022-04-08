@@ -35,30 +35,16 @@ public:
                 delete(root);
                 return NULL;
             }
-            //Case 2 : Has only right child
-            else if(root->left == NULL)
+            //Case 2 : Has only one child
+            if(root->left == NULL || root->right == NULL)
             {
-                // TreeNode* temp = root->right;
-                // root = root->right;
-                // root->right = deleteNode(root->right, temp->val);
-                return root->right;
-            
+                return root->right ? root->right : root->left;            
             }
-             //Case 3 : Has only left child
-            else if(root->right == NULL)
-            {
-                // TreeNode* temp = root->left;
-                // root = root->left;
-                // root->left = deleteNode(root->left, temp->val);   
-                return root->left;
-            }
-             //Case 4 : Has both children
-            else
-            {
-                TreeNode* temp = minValue(root->right);
-                root->val = temp->val;
-                root->right = deleteNode(root->right, temp->val);
-            }
+             //Case 3  : Has both children
+            TreeNode* temp = minValue(root->right);
+            root->val = temp->val;
+            root->right = deleteNode(root->right, temp->val);
+    
         }
         return root;
         
