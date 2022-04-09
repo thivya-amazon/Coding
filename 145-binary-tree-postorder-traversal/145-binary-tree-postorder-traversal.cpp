@@ -11,44 +11,37 @@
  */
 class Solution {
 public:
-    enum Zones{
-        ARRIVAL,
-        INTERIM,
-        DEPARTURE
-    };
     vector<int> postorderTraversal(TreeNode* root) {
         vector<int> result;
         if(root == NULL)
             return result;
-        stack<pair<TreeNode*, Zones>> s;
-        s.push({root, ARRIVAL});
-        while(!s.empty())
+        TreeNode* current = root;
+        while(current)
         {
-            TreeNode* node = s.top().first;
-            Zones currZone = s.top().second;
-            if(currZone == ARRIVAL)
+            if(current->right == NULL)
             {
-                currZone = INTERIM;
-                s.pop();
-                s.push({node, currZone});
-                if(node->left)
-                    s.push({node->left, ARRIVAL});
+                result.push_back(current->val);
+                current = current->left;
             }
-            else if(currZone == INTERIM)
+            else
             {
-                currZone = DEPARTURE;
-                s.pop();
-                s.push({node, currZone});
-                if(node->right)
-                    s.push({node->right, ARRIVAL});
-            }
-            else if(currZone == DEPARTURE)
-            {
-                s.pop();
-                result.push_back(node->val);
+                TreeNode* pred = current->right;
+                while(pred->left && pred->left != current)
+                    pred = pred->left;
+                if(pred->left == NULL)
+                {
+                    pred->left = current;
+                    result.push_back(current->val);
+                    current = current->right;
+                }
+                else
+                {
+                    pred->left = NULL;
+                    current = current->left;
+                }
             }
         }
+        reverse(result.begin(), result.end());
         return result;
-        
     }
 };
