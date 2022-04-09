@@ -11,41 +11,39 @@
  */
 class Solution {
 public:
-    enum Zones{
-        ARRIVAL,
-        INTERIM,
-        DEPARTURE        
-    };
     vector<int> inorderTraversal(TreeNode* root) {
         vector<int> result;
         if(root == NULL)
             return result;
-        stack<pair<TreeNode*, Zones>> s;
-        s.push({root, ARRIVAL});
-        while(!s.empty())
+        TreeNode* current = root;
+        while(current)
         {
-            TreeNode* node = s.top().first;
-            Zones currZone = s.top().second;
-            if(currZone == ARRIVAL)
+            if(current->left == NULL)
             {
-                currZone = INTERIM;
-                s.pop();
-                s.push({node, currZone});
-                if(node->left)
-                    s.push({node->left, ARRIVAL});
+                result.push_back(current->val);
+                current = current->right;
             }
-            else if(currZone == INTERIM)
+            else
             {
-                currZone = DEPARTURE;
-                s.pop();
-                s.push({node, currZone});
-                result.push_back(node->val);
-                if(node->right)
-                    s.push({node->right, ARRIVAL});
-            }
-            else if(currZone == DEPARTURE)
-            {
-                s.pop();
+                TreeNode* pred = current->left;
+                while(pred->right && pred->right != current)
+                {
+                    pred = pred->right;
+                }
+                //No thread created, yet. Create a thread and traverse left
+                if(pred->right == NULL)
+                {
+                    pred->right = current;
+                    current = current->left;
+                }
+                //Thread already created. Break thread and traverse right 
+                else
+                {
+                    pred->right = NULL;
+                    //Visit the node before moving right for inorder
+                    result.push_back(current->val);
+                    current = current->right;
+                }
             }
         }
         return result;
