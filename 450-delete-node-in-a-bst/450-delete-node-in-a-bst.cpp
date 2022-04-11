@@ -37,13 +37,18 @@ public:
             }
             //Case 2 : Has only one child
             if(root->left == NULL || root->right == NULL)
-            {
-                return root->right ? root->right : root->left;            
+            { 
+                TreeNode* temp = root;
+                root = root->right ? root->right : root->left; 
+                delete(temp);
             }
-             //Case 3  : Has both children
-            TreeNode* temp = minValue(root->right);
-            root->val = temp->val;
-            root->right = deleteNode(root->right, temp->val);
+            else
+            {
+                 //Case 3  : Has both children
+                TreeNode* temp = minValue(root->right);
+                root->val = temp->val;
+                root->right = deleteNode(root->right, temp->val);
+            }
     
         }
         return root;
