@@ -22,15 +22,19 @@ public:
             closestNode = root;
             return;
         }
-        if(abs(root->val - target) < minDiff)
+        while(root)
         {
-            minDiff = abs(root->val - target);
-            closestNode = root;
+            if(abs(root->val - target) < minDiff)
+            {
+                minDiff = abs(root->val - target);
+                closestNode = root;
+            }
+            if(root->val < target)
+                root = root->right;
+            else
+                root = root->left;
         }
-        if(root->val < target)
-            dfs(root->right, target);
-        else
-            dfs(root->left, target);
+
     }
     int closestValue(TreeNode* root, double target) {
         if(root == NULL)
