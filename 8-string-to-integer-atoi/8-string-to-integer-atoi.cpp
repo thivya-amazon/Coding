@@ -46,12 +46,8 @@ public:
             else
                 break;
         }
-        if((sign * tempResult) <= INT_MIN)
-            result = INT_MIN;
-        else if(tempResult > INT_MAX)
-            result = INT_MAX;
-        else
-            result = sign * tempResult;
+
+        result = sign * tempResult;
         
         return result;
     }
