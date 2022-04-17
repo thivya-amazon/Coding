@@ -16,10 +16,8 @@ public:
             }
             umap[key].push_back(s);
             //Reset the count vector
-            for(int j = 0; j < 26; j++)
-            {
-                count[j] = 0;
-            }
+            for(int i = 0; i < s.size(); i++)
+                count[s[i] - 'a']--;
         }
         for(auto i = umap.begin(); i != umap.end(); i++)
         {
