@@ -1,24 +1,6 @@
 class Solution {
 public:
-    bool isAnagram(string& s, string& p, int index)
-    {
-        unordered_map<char, int>mp;
-        for(int i = 0; i < p.size(); i++)
-        {
-            mp[p[i]]++;
-        }
-        string test = s.substr(index, p.size());
-        for(int i = 0; i < test.size(); i++)
-        {
-            mp[test[i]]--;
-        }
-        for(int i = 0; i < p.size(); i++)
-        {
-            if(mp[p[i]] > 0)
-                return false;
-        }
-        return true;
-    }
+
     vector<int> findAnagrams(string s, string p) {
         vector<int> result;
         vector<int> shash(26, 0);
@@ -41,8 +23,9 @@ public:
         {
             if(phash == shash)
                 result.push_back(left);
-            right++;
+            
             //Slide the window
+            right++;
             if(right != s.size())
             {
                 shash[s[right] - 'a']++;
