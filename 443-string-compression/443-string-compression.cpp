@@ -17,7 +17,7 @@ public:
             chars[++charIdx] = chars[i];
             if(charCount > 1)
             {
-                if(charCount >= 10)
+                if(charCount > 9)
                 {
                     vector<char> temp;
                     while(charCount > 0)
