@@ -27,8 +27,8 @@ public:
         int carry = 0;
         for(int i = 0; i < maxLength; i++)
         {
-            char x = (num1[i]) ? num1[i] : '0';
-            char y = (num2[i]) ? num2[i] : '0';
+            char x = (isdigit(num1[i])) ? num1[i] : '0';
+            char y = (isdigit(num2[i])) ? num2[i] : '0';
             cout << "x =" << x << "," << "y=" << y<< endl;
             int sum = (x -'0') + (y -'0') + carry;
             carry = sum / 10;
