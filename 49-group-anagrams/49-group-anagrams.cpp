@@ -11,6 +11,7 @@ public:
             string key = "";
             for(int j = 0; j < 26; j++)
             {
+                //Without having a delimiter multi-digit count values cannot be differentiated
                 key.push_back('#');
                 key.append(to_string(count[j]));
             }
