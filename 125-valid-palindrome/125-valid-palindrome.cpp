@@ -4,23 +4,14 @@ public:
         if(s.size() == 0)
             return true;
         string letters;
-        for(int i = 0; i < s.size(); i++)
+        for(int i = 0, j = s.size()-1; i < j; i++, j--)
         {
-            if((s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= 'a' && s[i] <= 'z') || (s[i] >= '0' && s[i] <= '9'))
-            {
-                s[i] = tolower(s[i]);
-            }
-            else
-            {
-                s.erase(s.begin() + i);
-                i--;
-            }
-        }
-       int start = 0;
-        int end = s.size()-1;
-        while(start < end)
-        {
-            if(s[start++] != s[end--])
+            while(i < j && !isalnum(s[i]))
+                i++;
+            while(i < j && !isalnum(s[j]))
+                j--;
+            
+            if(tolower(s[i]) != tolower(s[j]))
                 return false;
         }
         return true;
