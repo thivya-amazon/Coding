@@ -1,20 +1,19 @@
 class Solution {
 public:
-    int getPivotIndex(vector<int>& nums, int start, int end)
+    int getPivotIdx(vector<int>& nums, int start, int end)
     {
         srand(NULL);
-        int randIndex = start + rand() % (end - start);
-        swap(nums[randIndex], nums[start]);
+        int randIdx = start + rand() % (end - start);
+        swap(nums[randIdx], nums[start]);
         
         int pivot = nums[start];
         int smaller = start;
-        int bigger = start;
-        for(; bigger <= end; bigger++)
+        for(int bigger = start+1; bigger <= end; bigger++)
         {
             if(nums[bigger] < pivot)
             {
                 smaller++;
-                swap(nums[smaller], nums[bigger]);
+                swap(nums[bigger], nums[smaller]);
             }
         }
         swap(nums[start], nums[smaller]);
@@ -24,13 +23,12 @@ public:
     {
         if(start >= end)
             return;
-        int pivotIndex = getPivotIndex(nums, start, end);
-        quickSort(nums, start, pivotIndex-1);
-        quickSort(nums, pivotIndex+1, end);        
+        int pivotIdx = getPivotIdx(nums, start, end);
+        quickSort(nums, start, pivotIdx-1);
+        quickSort(nums, pivotIdx+1, end);
     }
     vector<int> sortArray(vector<int>& nums) {
-        int n = nums.size();
-        quickSort(nums, 0, n-1);
+        quickSort(nums, 0, nums.size()-1);
         return nums;
     }
 };
