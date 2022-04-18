@@ -12,7 +12,7 @@ public:
     bool validPalindrome(string s) {
         int start = 0;
         int end = s.size()-1;
-        int count = 0;
+
         while(start < end)
         {
             if(s[start] != s[end])
