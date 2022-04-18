@@ -2,7 +2,7 @@ class Solution {
 public:
     int myAtoi(string s) {
         int result = 0;
-        long long tempResult = 0;
+        int tempResult = 0;
         int sign = 1;
         
         if(s.size() < 1)
@@ -12,23 +12,23 @@ public:
         while(i < s.size())
         {
             if(isspace(s[i]))
-                s.erase(s.begin());
+                i++;
             else
                 break;
         }
         //Collect the sign
-            if(s[0] == '+')
+            if(s[i] == '+')
             {
                 sign = 1;
-                s.erase(s.begin());
+                i++;
             }
-            else if(s[0] == '-')
+            else if(s[i] == '-')
             {
                 sign = -1;
-                s.erase(s.begin());
+                i++;
             }               
 
-        for(int i = 0; i < s.size(); i++)
+        for(; i < s.size(); i++)
         {
             if(isdigit(s[i]))
             {
