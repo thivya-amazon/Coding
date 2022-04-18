@@ -34,14 +34,14 @@ public:
                 second = value(s[i+1]);
                 if(first < second)
                 {
-                    result = result + second - first;
+                    result += second - first;
                     i++;
                 }                    
                 else
-                    result = result + first;
+                    result += first;
             }
             else
-                result = result + first;
+                result += first;
         }
         return result;
     }
