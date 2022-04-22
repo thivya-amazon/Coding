@@ -4,7 +4,7 @@ public:
         vector<string> result;
         vector<int> mp(26, 0);
         vector<int> tempMap(26, 0);
-        //Map only the fisrt word
+        //Map only the first word
         for(auto c : words[0])
         {
             mp[c - 'a']++;
@@ -24,7 +24,7 @@ public:
             }
         }
         
-        for(int i = 0; i < 26; i++)
+        for(int i = 0; i < mp.size(); i++)
         {
             if(mp[i] > 0)
             {
