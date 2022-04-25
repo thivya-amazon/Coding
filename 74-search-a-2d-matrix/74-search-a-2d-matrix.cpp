@@ -4,20 +4,19 @@ public:
         int rows = matrix.size();
         int cols = matrix[0].size();
         
-        int maxCol = cols-1;
-        int minRow = 0;
+        int start = 0;
+        int end = (rows * cols) - 1;
         
-        //Check for boundary conditions
-        while(minRow < rows && maxCol >= 0)
+        while(start <= end)
         {
-            if(matrix[minRow][maxCol] == target)
+            int mid = start + (end-start)/2;
+            if(matrix[mid/cols][mid%cols] == target)
                 return true;
-            else if(target < matrix[minRow][maxCol])
-                maxCol--;
+            if(matrix[mid/cols][mid%cols] < target)
+                start = mid+1;
             else
-                minRow++;
+                end = mid-1;
         }
-        return false;
-            
+        return false;    
     }
 };
