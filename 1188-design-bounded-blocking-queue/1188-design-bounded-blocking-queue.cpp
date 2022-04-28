@@ -1,6 +1,13 @@
 #include <semaphore.h>
 
 class BoundedBlockingQueue {
+private:
+    int maxCapacity;
+    int buffSize;
+    queue<int> q;
+    mutex mu;
+    sem_t space;
+    sem_t elem;
 public:
     BoundedBlockingQueue(int capacity) {
         maxCapacity = capacity;
@@ -32,13 +39,10 @@ public:
     }
     
     int size() {
-        return buffSize;
+        mu.lock();
+        int val = buffSize;
+        mu.unlock();
+        return val;
     }
-    private:
-    int maxCapacity;
-    int buffSize;
-    queue<int> q;
-    mutex mu;
-    sem_t space;
-    sem_t elem;
+
 };
