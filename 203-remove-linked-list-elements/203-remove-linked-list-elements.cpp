@@ -16,10 +16,12 @@ public:
         ListNode* sentinel = new ListNode(INT_MIN, head);
         ListNode* pred = sentinel;
         ListNode* curr = head;
+        ListNode* temp = NULL;
         while(curr)
         {
             if(curr->val == val)
             {
+                temp = curr;
                 pred->next = curr->next;
             }
             else
@@ -27,6 +29,12 @@ public:
                 pred = curr;
             }
             curr = curr->next;
+            if(temp)
+            {
+                delete(temp);
+                temp = NULL;
+            }
+                
         }
         return sentinel->next;
     }
