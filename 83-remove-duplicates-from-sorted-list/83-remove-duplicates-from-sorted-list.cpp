@@ -20,19 +20,15 @@ public:
         while(curr)
         {
             ListNode* succ = curr->next;
-         //   if(succ && curr->val == succ->val)
-         //   {
-                while(succ && curr->val == succ->val)
-                {
-                    ListNode* temp = succ;
-                    succ = succ->next; 
-                    delete(temp);
-                }
-                curr->next = succ;
-      //      }
-                
-       //     else
-                prev = curr;
+
+            while(succ && curr->val == succ->val)
+            {
+                ListNode* temp = succ;
+                succ = succ->next; 
+                delete(temp);
+            }
+            curr->next = succ;
+            prev = curr;
             curr = curr->next;
         }
         return sentinel->next;
