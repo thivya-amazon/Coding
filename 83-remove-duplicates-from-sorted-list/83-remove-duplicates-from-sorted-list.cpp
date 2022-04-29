@@ -28,7 +28,7 @@ public:
                 delete(temp);
             }
             curr->next = succ;
-            prev = curr;
+            //prev = curr;
             curr = curr->next;
         }
         return sentinel->next;
