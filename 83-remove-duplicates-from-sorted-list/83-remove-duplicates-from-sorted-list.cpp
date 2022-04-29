@@ -22,7 +22,7 @@ public:
             ListNode* succ = curr->next;
             if(succ && curr->val == succ->val)
             {
-                ListNode* temp = curr;
+                //ListNode* temp = curr;
                 while(succ && curr->val == succ->val)
                 {
                     ListNode* temp = succ;
