@@ -20,9 +20,8 @@ public:
         while(curr)
         {
             ListNode* succ = curr->next;
-            if(succ && curr->val == succ->val)
-            {
-                //ListNode* temp = curr;
+         //   if(succ && curr->val == succ->val)
+         //   {
                 while(succ && curr->val == succ->val)
                 {
                     ListNode* temp = succ;
@@ -30,9 +29,9 @@ public:
                     delete(temp);
                 }
                 curr->next = succ;
-            }
+      //      }
                 
-            else
+       //     else
                 prev = curr;
             curr = curr->next;
         }
