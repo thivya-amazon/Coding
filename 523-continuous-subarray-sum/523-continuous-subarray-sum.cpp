@@ -16,11 +16,7 @@ public:
             }
             return false;
         }
-        
-        //For a prefix sum of 0, there exists a subarray whose sum is a multiple of k
-        umap[0] = 0;
-        
-        //Since we don't want to include prefix subarrays of size 1, we start from index 1
+
         for(int i = 0; i < nums.size(); i++)
         {
             prefixSum = (prefixSum + nums[i]) % k;
