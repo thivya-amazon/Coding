@@ -5,12 +5,12 @@ public:
         int prefixSum = 0;
         //Stores prefix sum of subarray as key and its length as value
         unordered_map<int,int> umap;
-        
+
         for(int i = 0; i < nums.size(); i++)
         {
             prefixSum += nums[i];
             if(prefixSum == k)
-                maxLength = i+1;
+                maxLength = max(maxLength, i+1);
             
             if(umap.find(prefixSum - k) != umap.end())
                 maxLength = max(maxLength, (i+1) - umap[prefixSum - k]);
