@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<vector<int>> result;
-    void permHelper(int sub_idx, vector<int>& nums)
+    void permHelper(int sub_idx, vector<int> nums)
     {
         if(sub_idx == nums.size())
         {
@@ -12,7 +12,6 @@ public:
         {
             swap(nums[i], nums[sub_idx]);
             permHelper(sub_idx+1, nums);
-            swap(nums[i], nums[sub_idx]);
         }
     }
     vector<vector<int>> permute(vector<int>& nums) {
