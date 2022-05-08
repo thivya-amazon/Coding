@@ -13,7 +13,7 @@ public:
             else if(s[i] == ')')
             {
                 if(stk.empty())
-                    s[i] = '$';
+                    count++;
                 else
                     stk.pop();
             }
@@ -23,11 +23,11 @@ public:
             count++;
             stk.pop();
         }
-        for(int i = 0; i < s.size(); i++)
-        {
-            if(s[i] == '$')
-                count++;
-        }
+        // for(int i = 0; i < s.size(); i++)
+        // {
+        //     if(s[i] == '$')
+        //         count++;
+        // }
         return count;
     }
 };
