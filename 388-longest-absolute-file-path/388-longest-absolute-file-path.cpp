@@ -6,7 +6,7 @@ public:
         stringstream ss(input);
         size_t found;
         int maxLength = 0;
-        unordered_map<int, int> pathLength;
+        vector<int> pathLength(input.size());
         while(!ss.eof())
         {
             getline(ss, item, '\n');
