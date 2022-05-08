@@ -5,9 +5,8 @@ public:
         stringstream ss(input);
         int maxLength = 0;
         unordered_map<int,int> levelLength;
-        while(!ss.eof())
+        while(getline(ss, item, '\n'))
         {
-            getline(ss, item, '\n');
             int numTabs = 0;
             while(item[numTabs] == '\t')
                 numTabs++;
