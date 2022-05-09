@@ -13,10 +13,7 @@ public:
         for(int i = windowSize; i < cardPoints.size(); i++)
         {
             windowSum += cardPoints[i] - cardPoints[i-windowSize];
-            if(windowSum < minScore)
-            {
-                minScore = windowSum;
-            }
+            minScore = min(minScore, windowSum);
         }
         
         int totalScore = 0;
