@@ -1,17 +1,21 @@
 class Solution {
 public:
     vector<int> dailyTemperatures(vector<int>& temperatures) {
-        vector<int> answer(temperatures.size(), 0);
-        //Mono stack holds the indices
+        int n = temperatures.size();
         stack<int> mono;
-        for(int i = temperatures.size()-1; i >= 0; i--)
+        vector<int> result(n, 0);
+        int span = 0;
+        for(int i = n-1; i >= 0; i--)
         {
-            while(!mono.empty() && temperatures[mono.top()] <= temperatures[i])
+            while(!mono.empty() && temperatures[i] >= temperatures[mono.top()])
                 mono.pop();
             if(!mono.empty())
-                answer[i] = mono.top() - i;
+            {
+                span = mono.top() - i;
+                result[i] = span;
+            }
             mono.push(i);
         }
-        return answer;
+        return result;
     }
 };
