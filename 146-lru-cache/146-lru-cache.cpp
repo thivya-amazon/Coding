@@ -1,18 +1,18 @@
 class LRUCache {
 public:
-    int cacheSize;
     list<pair<int,int>> cache;
     map<int, list<pair<int,int>>::iterator> keyMap;
+    int maxCap;
     LRUCache(int capacity) {
-        cacheSize = capacity;
+        maxCap = capacity;
     }
     void addToFront(int key, int value)
     {
-        cache.push_front({key, value});
+        cache.push_front({key,value});
         keyMap[key] = cache.begin();
     }
     int get(int key) {
-        map<int, list<pair<int,int>>::iterator> :: iterator it = keyMap.find(key);
+        map<int, list<pair<int,int>> :: iterator> :: iterator it = keyMap.find(key);
         if(it != keyMap.end())
         {
             int value = it->second->second;
@@ -24,22 +24,21 @@ public:
     }
     
     void put(int key, int value) {
-        map<int, list<pair<int,int>>::iterator> :: iterator it = keyMap.find(key);
+        map<int, list<pair<int,int>> :: iterator> :: iterator it = keyMap.find(key);
         if(it != keyMap.end())
         {
             cache.erase(it->second);
-            addToFront(key, value);
         }
         else
         {
-            if(cache.size() == cacheSize)
+            if(keyMap.size() == maxCap)
             {
                 int lruKey = cache.back().first;
-                cache.pop_back();
                 keyMap.erase(lruKey);
+                cache.pop_back();
             }
-            addToFront(key, value);
         }
+         addToFront(key,value);
     }
 };
 
