@@ -1,6 +1,10 @@
 class Solution {
 public:
     int reverse(int x) { 
+        int sign = 1;
+        if(x < 0)
+            sign = -1;
+        x = abs(x);
         int result = 0;
         while(x)
         {
@@ -11,7 +15,7 @@ public:
             result = (result*10) + (x % 10);
             x = x / 10;
         }
-       return result;
+       return result * sign;
                     
     }
 };
