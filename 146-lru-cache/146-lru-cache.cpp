@@ -1,22 +1,22 @@
 class LRUCache {
 public:
-    list<pair<int,int>> cache;
-    map<int, list<pair<int,int>>::iterator> keyMap;
+    list<pair<int,int>> tracker;
+    map<int, list<pair<int,int>>::iterator> cache;
     int maxCap;
     LRUCache(int capacity) {
         maxCap = capacity;
     }
     void addToFront(int key, int value)
     {
-        cache.push_front({key,value});
-        keyMap[key] = cache.begin();
+        tracker.push_front({key,value});
+        cache[key] = tracker.begin();
     }
     int get(int key) {
-        map<int, list<pair<int,int>> :: iterator> :: iterator it = keyMap.find(key);
-        if(it != keyMap.end())
+        map<int, list<pair<int,int>> :: iterator> :: iterator it = cache.find(key);
+        if(it != cache.end())
         {
             int value = it->second->second;
-            cache.erase(it->second);
+            tracker.erase(it->second);
             addToFront(key, value);
             return value;
         }
@@ -24,18 +24,18 @@ public:
     }
     
     void put(int key, int value) {
-        map<int, list<pair<int,int>> :: iterator> :: iterator it = keyMap.find(key);
-        if(it != keyMap.end())
+        map<int, list<pair<int,int>> :: iterator> :: iterator it = cache.find(key);
+        if(it != cache.end())
         {
-            cache.erase(it->second);
+            tracker.erase(it->second);
         }
         else
         {
-            if(keyMap.size() == maxCap)
+            if(cache.size() == maxCap)
             {
-                int lruKey = cache.back().first;
-                keyMap.erase(lruKey);
-                cache.pop_back();
+                int lruKey = tracker.back().first;
+                cache.erase(lruKey);
+                tracker.pop_back();
             }
         }
          addToFront(key,value);
