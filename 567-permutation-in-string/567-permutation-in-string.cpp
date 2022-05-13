@@ -28,13 +28,10 @@ public:
         {
             s2chars[s2[i-k]]--;
             if(s2chars[s2[i-k]] == 0)
-                s2chars.erase(s2[i-k]);
-            
-            if(s2chars.count(s2[i]))
-                s2chars[s2[i]]++;
-            else
-                s2chars[s2[i]] = 1;
-            
+                s2chars.erase(s2[i-k]);            
+
+            s2chars[s2[i]]++;
+             
             if(s1chars == s2chars)
                 return true;            
         }
