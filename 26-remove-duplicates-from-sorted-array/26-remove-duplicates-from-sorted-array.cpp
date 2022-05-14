@@ -7,7 +7,8 @@ public:
             if(nums[i] != nums[uniqueIndex])
             {
                 uniqueIndex++;
-                nums[uniqueIndex] = nums[i];
+                //nums[uniqueIndex] = nums[i];
+                swap(nums[uniqueIndex], nums[i]);
             }
         }
         return uniqueIndex+1;
