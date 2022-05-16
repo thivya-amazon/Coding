@@ -8,14 +8,10 @@ public:
             result += "0";
             return result;
         }
-        else if(num < 0)
-        {
-            num = (~num + 1);
-        }
 
         while(num)
         {
-            int lsb = num % 16;
+            int lsb = num & 0xf;
             if(lsb < 10)
                 result.push_back(lsb +'0');
             else
@@ -42,7 +38,7 @@ public:
                         break;
                 }
             }
-            num /= 16;
+            num = num >> 4;
         }
         reverse(result.begin(), result.end());
         return result;
