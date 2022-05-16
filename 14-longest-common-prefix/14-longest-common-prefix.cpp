@@ -8,7 +8,7 @@ public:
         {
             while(strs[i].find(prefix) != 0)
             {
-                prefix = prefix.substr(0, prefix.size()-1);
+                prefix.pop_back();
             }
         }
         return prefix;
