@@ -7,10 +7,10 @@ public:
         
         for(int right = 0; right < s.size(); right++)
         {
-            if(distinctChars.count(s[right]))
+           // if(distinctChars.count(s[right]))
                 distinctChars[s[right]]++;
-            else
-                distinctChars[s[right]] = 1;
+          //  else
+          //      distinctChars[s[right]] = 1;
             
             while(left <= right && distinctChars[s[right]] > 1)
             {
