@@ -28,7 +28,10 @@ public:
             leader = leader->next;
             follower = follower->next;
         }
+        ListNode* temp = follower;
         prev->next = follower->next;
+        delete(temp);
+        temp = NULL;
         return sentinel->next;
     }
 };
