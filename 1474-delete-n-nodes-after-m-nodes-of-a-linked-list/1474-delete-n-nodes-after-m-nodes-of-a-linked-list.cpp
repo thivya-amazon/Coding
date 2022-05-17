@@ -27,8 +27,10 @@ public:
             int delCount = 0;
             while(curr && delCount < n)
             {
+                ListNode* temp = curr;
                 curr = curr->next;
                 delCount++;
+                delete(temp);
             }
             prev->next = curr;
         }
