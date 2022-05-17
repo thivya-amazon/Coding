@@ -1,18 +1,19 @@
 class Solution {
 public:
     int arrangeCoins(int n) {
-        long used = 0;
-        int i;
-        for(i = 1; i <= n; i++)
+        long start = 0;
+        long end = n;
+        while(start <= end)
         {
-            if(used + i <= n)
-                used += i;
+            long mid = start + (end-start)/2;
+            if(mid * (mid + 1) / 2 == n)
+                return (int)mid;
+            if(mid * (mid + 1) / 2 > n)
+                end = mid - 1;
             else
-                break;
+                start = mid + 1;
         }
-        // if(n == used)
-        //     return i;
-        // else
-            return i-1;
+        return (int)end;
+        
     }
 };
