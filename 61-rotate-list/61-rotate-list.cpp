@@ -25,7 +25,7 @@ public:
         curr->next = head;
     
         ListNode* newTail = head;
-        for(int i = 0; i < count - k % count-1; i++)
+        for(int i = 0; i < count - (k % count) - 1; i++)
         {
             newTail = newTail->next;
         }
@@ -33,7 +33,7 @@ public:
         
         //Break the ring
         newTail->next = NULL;
-        ListNode* curr2 = newHead;
+        // ListNode* curr2 = newHead;
 
         return newHead;
     }
