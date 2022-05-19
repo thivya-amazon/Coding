@@ -1,20 +1,20 @@
 class Solution {
 public:
     string removeKdigits(string num, int k) {
+        string result;
         if(k == 0)
             return num;
-        stack<char> mono;
-        string result;
+        stack<int> mono;
+        //Find the previous min element for every num[i]
         for(int i = 0; i < num.size(); i++)
         {
-            while(k > 0 && !mono.empty() && mono.top() > num[i])
+            while(!mono.empty() && mono.top() > (num[i] - '0') && k > 0)
             {
                 mono.pop();
                 k--;
             }
-            mono.push(num[i]);
-            
-            if(mono.size() == 1 && mono.top() == '0')
+            mono.push(num[i] - '0');
+            if(mono.size() == 1 && mono.top() == 0)
                 mono.pop();
         }
         
@@ -27,7 +27,7 @@ public:
         
         while(!mono.empty())
         {
-            result.push_back(mono.top());
+            result.push_back(mono.top() + '0');
             mono.pop();
         }
         reverse(result.begin(), result.end());
