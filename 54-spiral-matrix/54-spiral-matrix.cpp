@@ -22,6 +22,7 @@ public:
             
             if(left > right || top > bottom)
                 break; 
+            
             //3. Traverse from right to left and move the bottom boundary after the row is traversed
             for(int i = right; i >= left; i--)
                 result.push_back(matrix[bottom][i]);
