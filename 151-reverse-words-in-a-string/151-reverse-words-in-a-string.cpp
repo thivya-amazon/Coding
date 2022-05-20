@@ -1,49 +1,50 @@
 class Solution {
 public:
-    void revWord(string& s, int start, int end)
+    void revword(string& s, int start, int end)
     {
         while(start < end)
         {
-            swap(s[start], s[end]);
-            start++;
-            end--;
+            swap(s[start++], s[end--]);
         }
     }
     string reverseWords(string s) {
         reverse(s.begin(), s.end());
+        int startIdx = 0;
+        int endIdx = s.size() - 1;
         
-        int start_idx = 0;
-        //Erase leading whitespaces
-        while(isspace(s[start_idx]) && s[start_idx] != NULL)
-        {
-            s.erase(s.begin() + start_idx);
-        }
-        
-        int end_idx = s.size()-1;
-        //Erase trailing whitespaces
-        while(isspace(s[end_idx]) && s[end_idx] != NULL)
-        {
-            s.erase(s.begin() + end_idx);
-            end_idx--;
-        }
-        int index = 0;
+        int index = startIdx;
         while(index < s.size())
         {
-            int wordStart = index;
-            while(isspace(s[wordStart]))
+            int j = index;
+            //Skip leading spaces
+            while(j < s.size() && isspace(s[j]))
+                j++;
+            
+            //Count the number of letters in a word
+            int count = 0;
+            while(j < s.size() && !isspace(s[j]))
             {
-                s.erase(s.begin()+wordStart);
+                j++;
+                count++;
             }
-                
-            while(!isspace(s[index]) && s[index] != NULL)
-            {
-                index++;
-            }
-                
-            revWord(s, wordStart, index-1);
-            //skip the white space and make the index point the start of the next word
-            index++;
+            
+            if(index == 0)
+                revword(s, index, j-1);
+            else
+                revword(s, index+1, j-1);
+            
+            
+            if(count == 0)
+                index = j;
+            else
+                index = index + count;
         }
+        while(isspace(s[endIdx]))
+        {
+            s.pop_back();
+            endIdx--;
+        }
+            
         return s;
     }
 };
