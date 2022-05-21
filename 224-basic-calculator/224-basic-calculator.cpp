@@ -1,15 +1,16 @@
 class Solution {
 public:
     int calculate(string s) {
+        int result = 0;
+        if(s.size() == 0)
+            return result;
         int number = 0;
         char operation = '+';
         stack<int> stk;
-        
         for(int i = 0; i < s.size(); i++)
         {
-            //Find the number to operate on
             if(isdigit(s[i]))
-                number = number * 10 + (s[i] - '0');
+                number = number*10 + (s[i] - '0');
             else if(s[i] == '(')
             {
                 int j = i+1;
@@ -19,46 +20,52 @@ public:
                     if(s[j] == '(')
                         braces++;
                     else if(s[j] == ')')
-                        braces--;
+                        braces--; 
                     j++;
                 }
-                //length of the outermost expression within parantheses
-                int length = j-i-1;
-                number = calculate(s.substr(i+1, length));
-                //Reset i back to the last character
+                int len = j-i-1;
+                number = calculate(s.substr(i+1, len));
                 i = j-1;
             }
-            
-            //Find the operator and operate on the number
-            if(!isdigit(s[i]) && !iswspace(s[i]) || i == s.size()-1)
-            {
-                if(operation == '+')
-                    stk.push(number);
-                else if(operation == '-')
-                    stk.push(-number);
-                else if(operation == '*')
+
+            if((!isdigit(s[i]) && !isspace(s[i])) || i == s.size()-1)
                 {
-                    int prevNum = stk.top();
-                    stk.pop();
-                    stk.push(prevNum * number);
+                    switch(operation)
+                    {
+                        case '+':
+                           stk.push(number);
+                           break;
+                            
+                        case '-':
+                            stk.push(-number);
+                            break;
+                            
+                        case '*':
+                            if(!stk.empty())
+                            {
+                                int prev = stk.top();
+                                stk.pop();
+                                stk.push(prev*number);
+                            }
+                            break;
+                        case '/':
+                            if(!stk.empty())
+                            {
+                                int prev = stk.top();
+                                stk.pop();
+                                stk.push(prev/number);
+                            }
+                            break;
+                    }
+                    operation = s[i];
+                    number = 0;
                 }
-                else if(operation == '/')
-                {
-                    int prevNum = stk.top();
-                    stk.pop();
-                    stk.push(prevNum / number);
-                }
-                //Update the operation and reset the number to get the next number
-                operation = s[i];
-                number = 0;
             }
-        }
         
-        //Stack has all the number with appropriate signs. Just adding all of them gives the result
-        int result = 0;
+        
         while(!stk.empty())
         {
-            result += stk.top();
+           result += stk.top();
             stk.pop();
         }
         return result;
