@@ -27,44 +27,29 @@ public:
                 int op2 = 0;
                 int op1 = 0;
                 int result = 0;
+                op2 = op.top();
+                op.pop();
+                op1 = op.top();
+                op.pop();
                 switch(tokens[i][0])
                 {
                     case '+':
-                        op2 = op.top();
-                        op.pop();
-                        op1 = op.top();
-                        op.pop();
                         result = op1 + op2;
-                        res.push(result);
                         break;
                         
                     case '-':
-                        op2 = op.top();
-                        op.pop();
-                        op1 = op.top();
-                        op.pop();
                         result = op1 - op2;
-                        res.push(result);
                         break;
                         
                     case '*':
-                        op2 = op.top();
-                        op.pop();
-                        op1 = op.top();
-                        op.pop();
                         result = op1 * op2;
-                        res.push(result);
                         break;
                         
                     case '/':
-                        op2 = op.top();
-                        op.pop();
-                        op1 = op.top();
-                        op.pop();
                         result = op1 / op2;
-                        res.push(result);
                         break;
                 }
+                res.push(result);
             }
         }
         return res.top();
