@@ -5,7 +5,7 @@ public:
     TicTacToe(int n) {
         board.resize(n);
         for(int i = 0; i < n; i++)
-            board[i].resize(n);
+            board[i].resize(n, 0);
         num = n;
     }
     
