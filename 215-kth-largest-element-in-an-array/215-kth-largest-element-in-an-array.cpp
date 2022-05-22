@@ -2,8 +2,8 @@ class Solution {
 public:
     int partition(vector<int>& nums, int start, int end)
     {
-        // int randIdx = start + rand() % (end - start);
-        // swap(nums[randIdx], nums[start]);
+        int randIdx = start + rand() % (end - start+1);
+        swap(nums[randIdx], nums[start]);
         
         int pivot = nums[start];
         int smaller = start;
