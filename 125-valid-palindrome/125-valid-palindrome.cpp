@@ -3,16 +3,18 @@ public:
     bool isPalindrome(string s) {
         if(s.size() == 0)
             return true;
-        string letters;
-        for(int i = 0, j = s.size()-1; i < j; i++, j--)
+        int left = 0;
+        int right = s.size()-1;
+        while(left < right)
         {
-            while(i < j && !isalnum(s[i]))
-                i++;
-            while(i < j && !isalnum(s[j]))
-                j--;
-            
-            if(tolower(s[i]) != tolower(s[j]))
+            while(left < right && !isalnum(s[left]))
+                left++;
+            while(left < right && !isalnum(s[right]))
+                right--;
+            if(tolower(s[left]) != tolower(s[right]))
                 return false;
+            left++;
+            right--;
         }
         return true;
     }
