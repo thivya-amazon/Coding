@@ -11,8 +11,8 @@ public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
         int m = nums1.size();
         int n = nums2.size();
-        if(m < n)
-            return findMedianSortedArrays(nums2, nums1);
+        // if(m < n)
+        //     return findMedianSortedArrays(nums2, nums1);
         int k = 0;
         //m+n = odd
         if((m+n) % 2 == 1)
