@@ -1,26 +1,26 @@
 class Solution {
 public:
-    int helper(int x)
+    int helper(int n)
     {
-        long total = 0;
-        while(x)
+        int total = 0;
+        while(n)
         {
-            total += pow(x%10, 2);
-            x /= 10;
+            total += pow((n % 10), 2);
+            n /= 10;
         }
         return total;
     }
     bool isHappy(int n) {
-        int slow = n;
         int fast = n;
-        
+        int slow = n;
         while(true)
         {
+            fast = helper(fast);
+            fast = helper(fast);
             slow = helper(slow);
-            fast = helper(fast);
-            fast = helper(fast);
-            if(slow == fast)
-                return slow == 1;
+            if(fast == slow)
+                break;
         }
+        return slow == 1;
     }
 };
