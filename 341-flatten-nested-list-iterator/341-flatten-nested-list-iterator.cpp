@@ -20,33 +20,38 @@ class NestedIterator {
 public:
     vector<int> flatList;
     int index;
+    int count;
     NestedIterator(vector<NestedInteger> &nestedList) {
         index = 0;
-        flattenLevels(nestedList);
+        count = 0;
+        flattenList(nestedList);
     }
     
-    int next() {        
-        return flatList[index++];       
+    int next() {
+        int nextElem = flatList[index];
+        index++;
+        return nextElem;
     }
     
     bool hasNext() {
-       if(index < flatList.size())
-           return true;
+        if(index < count)
+            return true;
         return false;
     }
-    
-    void flattenLevels(vector<NestedInteger> &nestedList)
+    void flattenList(vector<NestedInteger>& nestedList)
     {
-        for(auto nestedInt : nestedList)
+        for(auto elem : nestedList)
         {
-            if(nestedInt.isInteger())
-                flatList.push_back(nestedInt.getInteger());
+            if(elem.isInteger())
+            {
+                flatList.push_back(elem.getInteger());
+                count++;
+            }
             else
             {
-                auto listInt = nestedInt.getList();
-                flattenLevels(listInt);
-            }
-                
+                auto itemList = elem.getList();
+                flattenList(itemList);
+            }                
         }
     }
 };
