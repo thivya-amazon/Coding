@@ -1,14 +1,20 @@
 class Solution {
 public:
-    void rotate(vector<int>& nums, int k) {
-        int n = nums.size();
-        vector<int> temp(n);
-        for(int i = 0; i < nums.size(); i++)
+    void reverse(vector<int>& nums, int start, int end)
+    {
+        while(start < end)
         {
-            int rotIdx = (i + k) % n;
-            temp[rotIdx] = nums[i];
+            swap(nums[start++], nums[end--]);
         }
-        nums = temp;
+    }
+    void rotate(vector<int>& nums, int k) {
+        k = k % nums.size();
+        //reverse the entire array
+        reverse(nums, 0, nums.size()-1);
+        //reverse k elements from the start
+        reverse(nums, 0, k-1);
+        //reverse n-k elements from k
+        reverse(nums, k, nums.size()-1);
             
     }
 };
