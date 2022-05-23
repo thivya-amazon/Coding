@@ -6,13 +6,14 @@ public:
         if(memo.find(sub_idx) != memo.end())
             return memo[sub_idx];
         
-        if(sub_idx == s.size())
-            return 1;
-        
         if(s[sub_idx] == '0')
             return 0;
-        if(sub_idx == s.size()-1)
+        if(sub_idx == s.size() || sub_idx == s.size()-1)
             return 1;
+        
+
+        // if(sub_idx == s.size()-1)
+        //     return 1;
         
         //consider 1 digit
         int count = decodeHelper(sub_idx+1, s);
