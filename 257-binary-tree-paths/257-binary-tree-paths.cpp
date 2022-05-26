@@ -13,30 +13,25 @@ class Solution {
 public:
     vector<string> result;
      
-    void dfs(TreeNode* root, vector<int>& slate)
+    void dfs(TreeNode* root, string slate)
     {
-        slate.push_back(root->val);
+        if(root == NULL)
+            return;
+        slate += to_string(root->val);
         if(root->left == NULL && root->right == NULL)
+            result.push_back(slate);
+        else
         {
-            string path; 
-            for(int i = 0; i < slate.size(); i++)
-            {
-                path += to_string(slate[i]);
-                if(i != slate.size()-1)
-                    path += "->";
-            }
-            result.push_back(path);
-        }
-        if(root->left)
+            slate += "->";
             dfs(root->left, slate);
-        if(root->right)
             dfs(root->right, slate);
-         slate.pop_back();
+        }
+            
     }
     vector<string> binaryTreePaths(TreeNode* root) {
         if(root == NULL)
             return result;
-        vector<int> slate;
+        string slate;
         dfs(root, slate);
         return result;
     }
