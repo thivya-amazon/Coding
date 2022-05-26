@@ -11,23 +11,22 @@
  */
 class Solution {
 public:
-     vector<vector<int>> result;
+    vector<vector<int>> result;
     void dfs(TreeNode* root, vector<int>& slate, int target)
     {
         if(root == NULL)
             return;
+        target -= root->val;
         slate.push_back(root->val);
-        target = target - root->val;
         if(root->left == NULL && root->right == NULL)
         {
-            if(0 == target)
-                result.push_back(slate);
+            if(target == 0)
+                result.push_back(slate);              
         }
         dfs(root->left, slate, target);
         dfs(root->right, slate, target);
         slate.pop_back();
     }
-
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
         if(root == NULL)
             return result;
