@@ -7,18 +7,15 @@ public:
         umap[0] = 1;
         for(int i = 0; i < nums.size(); i++)
         {
+            //1. Find prefix sum
             prefixSum += nums[i];
             
-            // if(prefixSum == k)
-            //     globalCount += 1;
-            
+            //2. For a given suffix, look for the corresponding prefix in the hashmap
             if(umap.find(prefixSum - k) != umap.end())
                 globalCount += umap[prefixSum - k];
             
-            if(umap.find(prefixSum) != umap.end())
-                umap[prefixSum] += 1;
-            else
-                umap[prefixSum] = 1;            
+            //3. Update hashmap with the current prefix
+            umap[prefixSum]++;         
         }
         return globalCount;
     }
