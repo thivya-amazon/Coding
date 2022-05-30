@@ -5,33 +5,43 @@ public:
     int front;
     int rear;
     MyCircularQueue(int k) {
-        arr.resize(k);
         capacity = k;
+        arr.resize(capacity);
         front = -1;
         rear = -1;
     }
     
     bool enQueue(int value) {
+        //Full
         if(isFull())
             return false;
-        if(front == -1 && rear == -1)    
-            front = rear = 0;
-        else
-            rear = (rear+1) % capacity;
+        //Empty
+        if(isEmpty())
+        {
+            front = 0;
+            rear = 0;
+            arr[rear] = value;
+            return true;
+        }
+        //Normal
+        rear = (rear+1) % capacity;
         arr[rear] = value;
         return true;
+        
     }
     
     bool deQueue() {
+        //Empty
         if(isEmpty())
             return false;
+        //last element
         if(front == rear)
         {
             front = -1;
             rear = -1;
+            return true;
         }
-        else
-            front = (front + 1) % capacity;
+        front = (front + 1) % capacity;
         return true;
     }
     
