@@ -1,38 +1,26 @@
 class Solution {
 public:
     vector<int> arraysIntersection(vector<int>& arr1, vector<int>& arr2, vector<int>& arr3) {
-        vector<int> sortedTwo;
+        int p1 = 0;
+        int p2 = 0;
+        int p3 = 0;
         vector<int> result;
-        int index1 = 0;
-        int index2 = 0;
-        int index3 = 0;
-        while(index1 < arr1.size() && index2 < arr2.size())
+        while(p1 < arr1.size() && p2 < arr2.size() && p3 < arr3.size())
         {
-            if(arr1[index1] == arr2[index2])
+            if(arr1[p1] == arr2[p2] && arr2[p2] == arr3[p3])
             {
-                sortedTwo.push_back(arr1[index1]);
-                index1++;
-                index2++;
+                result.push_back(arr1[p1]);
+                p1++; p2++; p3++;
             }
-               
-            else if(arr1[index1] > arr2[index2])
-                index2++;
             else
-                index1++;
-        }
-        index1 = 0;
-        while(index3 < arr3.size() && index1 < sortedTwo.size())
-        {
-            if(arr3[index3] == sortedTwo[index1])
             {
-                result.push_back(sortedTwo[index1]);
-                index3++;
-                index1++;
+                if(arr1[p1] < arr2[p2])
+                    p1++;
+                else if(arr2[p2] < arr3[p3])
+                    p2++;
+                else
+                    p3++;
             }
-            else if(arr3[index3] > sortedTwo[index1])
-                index1++;
-            else
-                index3++;
         }
         return result;
     }
