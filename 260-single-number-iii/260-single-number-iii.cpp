@@ -2,19 +2,12 @@ class Solution {
 public:
     vector<int> singleNumber(vector<int>& nums) {
         vector<int> result;
-        int bitMask = 0;
+        uint32_t bitMask = 0;
         for(auto num : nums)
             bitMask ^= num;
         int x = 0;
-        int diff = 0;
-        for(int i = 0; i < 32; i++)
-        {
-            if(bitMask & (1 << i))
-            {
-                diff = bitMask & (1 << i);
-                break;
-            }               
-        }
+        uint32_t diff = bitMask & (-bitMask);
+
         for(int i = 0; i < nums.size(); i++)
         {
             if(nums[i] & diff)
