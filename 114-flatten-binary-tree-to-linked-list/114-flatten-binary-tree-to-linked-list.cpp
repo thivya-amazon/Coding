@@ -11,29 +11,20 @@
  */
 class Solution {
 public:
-    TreeNode* dfs(TreeNode* node, TreeNode* pred)
-    {
-        TreeNode* oldLeft = NULL;
-        TreeNode* oldRight = NULL;
-        if(node->left)
-            oldLeft = node->left;
-        if(node->right)
-            oldRight = node->right;
-        //Link the pred to the node
-        pred->right = node;
-        pred->left = NULL;
-        pred = node;
-        if(oldLeft)
-            pred = dfs(oldLeft, pred);
-        if(oldRight)
-            pred = dfs(oldRight, pred);
-        
-        return pred;
-    }
     void flatten(TreeNode* root) {
-        if(root == NULL)
-            return;
-        TreeNode* sentinel = new TreeNode(INT_MIN);
-        dfs(root, sentinel);
+    while(root != NULL)
+    {
+        if(root->left)
+        {
+            TreeNode* left = root->left;
+            TreeNode* current = left;
+            while(current->right)
+                current=current->right;
+            current->right = root->right;
+            root->left = NULL;
+            root->right = left;
+        }
+        root = root->right;
     }
+}
 };
