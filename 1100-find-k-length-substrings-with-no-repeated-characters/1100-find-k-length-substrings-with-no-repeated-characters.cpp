@@ -8,12 +8,13 @@ public:
         unordered_map<char, int> chars(k);
         for(int i = 0; i < k; i++)
         {
-            if(chars.count(s[i]))
-            {
-                chars[s[i]]++;
-            }             
-            else
-                chars[s[i]] = 1;
+            // if(chars.count(s[i]))
+            // {
+            //     chars[s[i]]++;
+            // }             
+            // else
+            //     chars[s[i]] = 1;
+             chars[s[i]]++;
         }
         if(chars.size() == k)
             count++;
@@ -24,12 +25,13 @@ public:
             if(chars[s[i-k]] == 0)
                 chars.erase(s[i-k]);
 
-            if(chars.count(s[i]))
-            {
-                chars[s[i]]++;
-            }             
-            else
-                chars[s[i]] = 1;
+            // if(chars.count(s[i]))
+            // {
+            //     chars[s[i]]++;
+            // }             
+            // else
+            //     chars[s[i]] = 1;
+             chars[s[i]]++;
             
             if(chars.size() == k)
                 count++;
