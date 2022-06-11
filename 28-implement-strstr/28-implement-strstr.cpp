@@ -3,7 +3,6 @@ public:
     int strStr(string haystack, string needle) {
         int hIndex = 0;
         int nIndex = 0;
-        int startIdx = -1;
 
         if(needle.size() > haystack.size())
             return -1;
