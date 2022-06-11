@@ -5,7 +5,8 @@ public:
         {
             while(nums[i] != i)
             {
-                if(nums[i] < nums.size())
+                int dstIdx = nums[i];
+                if(dstIdx < nums.size())
                     swap(nums[i], nums[nums[i]]);
                 else
                     break;
