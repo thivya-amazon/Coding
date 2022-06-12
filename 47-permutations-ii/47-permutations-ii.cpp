@@ -10,7 +10,7 @@ vector<vector<int>> result;
         }
         for(int i = sub_idx; i < nums.size(); i++)
         {
-            if(i == sub_idx || (nums[i] != nums[i-1] && nums[i] != nums[sub_idx]))
+            if(i == sub_idx || ((nums[i] != nums[i-1] && nums[i] != nums[sub_idx])))
             {
                 swap(nums[i], nums[sub_idx]);
                 permHelper(sub_idx+1, nums);
