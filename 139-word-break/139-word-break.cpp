@@ -1,31 +1,23 @@
 class Solution {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
-        unordered_set<string> dict(wordDict.begin(), wordDict.end());
-        //Use BFS with every index in s as a node
+        set<string> dict;
+        for(auto s : wordDict)
+            dict.insert(s);
         int n = s.size();
-        queue<int> q;
-        vector<bool> visited(n, false);
-        q.push(0);
-        while(!q.empty())
-        {
-            int start = q.front();
-            q.pop();
-            if(visited[start])
-                continue;
-            for(int end = start+1; end <= n; end++)
+        vector<bool> dp(n+1, false);
+        //Empty string is present in dict
+        dp[0] = true;
+        for(int i = 1; i <= n; i++)
+            for(int j = 0; j < i; j++)
             {
-                string sub = s.substr(start, end-start);
-                if(dict.count(sub))
+                string curr = s.substr(j, i-j);
+                if(dp[j] && dict.count(curr))
                 {
-                    q.push(end);
-                    //The entire string s has been parsed
-                    if(end == n)
-                        return true;
-                }
+                    dp[i] = true;
+                    break;
+                }                    
             }
-            visited[start] = true;
-        }
-        return false;
+        return dp[n];
     }
 };
